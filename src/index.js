@@ -1,5 +1,5 @@
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
-import SlimSelect from 'slim-select'
+// import SlimSelect from 'slim-select'
 
 // new SlimSelect({
 //   select: '#selectElement'
