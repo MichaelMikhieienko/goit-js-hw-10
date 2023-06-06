@@ -1,4 +1,4 @@
-import { fetchBreeds, fetchCatByBreed } from './cat-api';
+import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 import SlimSelect from 'slim-select'
 
 // new SlimSelect({
@@ -29,9 +29,13 @@ function hideError() {
 
 // Вызываем функцию fetchBreeds при загрузке страницы
 window.addEventListener('DOMContentLoaded', () => {
+  breedSelect.style.display = 'none';
+
   showLoader();
+  hideError();
   fetchBreeds()
     .then(breeds => {
+      breedSelect.style.display = 'block';
       // Наполняем select элемент опциями на основе полученных пород
       breeds.forEach(breed => {
         const option = document.createElement('option');
@@ -79,7 +83,7 @@ breedSelect.addEventListener('change', () => {
     })
     .catch(error => {
       // Обрабатываем ошибку
-      console.error('Error:', error);
+      console.error('Error:', error.message);
       // Показываем элемент ошибки
       showError();
     })
