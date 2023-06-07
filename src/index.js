@@ -1,19 +1,15 @@
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
-// import SlimSelect from 'slim-select'
-
-// new SlimSelect({
-//   select: '#selectElement'
-// })
 
 const breedSelect = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
+breedSelect.style.display = 'none';
+error.style.display = 'none';
 
 function showLoader() {
   loader.style.display = 'block';
 }
 
-// Функция для скрытия загрузчика
 function hideLoader() {
   loader.style.display = 'none';
 }
@@ -22,12 +18,10 @@ function showError() {
   error.style.display = 'block';
 }
 
-// Функция для скрытия элемента ошибки
 function hideError() {
   error.style.display = 'none';
 }
 
-// Вызываем функцию fetchBreeds при загрузке страницы
 window.addEventListener('DOMContentLoaded', () => {
   breedSelect.style.display = 'none';
 
@@ -36,7 +30,6 @@ window.addEventListener('DOMContentLoaded', () => {
   fetchBreeds()
     .then(breeds => {
       breedSelect.style.display = 'block';
-      // Наполняем select элемент опциями на основе полученных пород
       breeds.forEach(breed => {
         const option = document.createElement('option');
         option.value = breed.id;
@@ -45,9 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch(error => {
-      // Обрабатываем ошибку
       console.error('Error:', error);
-      // Показываем элемент ошибки
       showError();
     })
     .finally(() => {
@@ -57,7 +48,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const catInfo = document.querySelector('.cat-info');
 
-// Функция для обновления информации о коте в блоке cat-info
 function updateCatInfo(cat) {
   console.log(cat);
   catInfo.innerHTML = `
@@ -68,7 +58,6 @@ function updateCatInfo(cat) {
   `;
 }
 
-// Слушаем событие изменения значения в селекте
 breedSelect.addEventListener('change', () => {
   const selectedBreedId = breedSelect.value;
   showLoader();
@@ -82,9 +71,7 @@ breedSelect.addEventListener('change', () => {
       hideError();
     })
     .catch(error => {
-      // Обрабатываем ошибку
       console.error('Error:', error.message);
-      // Показываем элемент ошибки
       showError();
     })
     .finally(() => {
