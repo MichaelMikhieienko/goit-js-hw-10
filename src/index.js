@@ -3,8 +3,7 @@ import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 const breedSelect = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
-breedSelect.style.display = 'none';
-error.style.display = 'none';
+
 
 function showLoader() {
   loader.style.display = 'block';
@@ -22,14 +21,11 @@ function hideError() {
   error.style.display = 'none';
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  breedSelect.style.display = 'none';
-
-  showLoader();
-  hideError();
   fetchBreeds()
     .then(breeds => {
-      breedSelect.style.display = 'block';
+
+      breedSelect.classList.remove("is-hidden");
+      loader.classList.add("is-hidden")
       breeds.forEach(breed => {
         const option = document.createElement('option');
         option.value = breed.id;
@@ -38,13 +34,10 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch(error => {
-      console.error('Error:', error);
-      showError();
-    })
-    .finally(() => {
-      hideLoader();
-    });
-});
+      loader.classList.add("is-hidden")
+      error.classList.remove("is-hidden")      
+    })    
+
 
 const catInfo = document.querySelector('.cat-info');
 
